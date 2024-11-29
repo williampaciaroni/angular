@@ -337,10 +337,10 @@ export class HttpResponse<T> extends HttpResponseBase {
  *
  * @publicApi
  */
-export class HttpErrorResponse extends HttpResponseBase implements Error {
+export class HttpErrorResponse<T = unknown> extends HttpResponseBase implements Error {
   readonly name = 'HttpErrorResponse';
   readonly message: string;
-  readonly error: any | null;
+  readonly error: T | null;
 
   /**
    * Errors are never okay, even when the status code is in the 2xx success range.
@@ -348,7 +348,7 @@ export class HttpErrorResponse extends HttpResponseBase implements Error {
   override readonly ok = false;
 
   constructor(init: {
-    error?: any;
+    error?: T;
     headers?: HttpHeaders;
     status?: number;
     statusText?: string;
